@@ -13,6 +13,10 @@ from user_interface.manage_data import load_data
 from user_interface.manage_data import update_data
 from bank_account.bank_account import BankAccount
 
+def get_user_input():
+            user_input = input('Enter your name: ')
+            return user_input
+
 class ClientLookupWindow(LookupWindow):
     """This class describes behavior for the ClientLookup window."""
     
@@ -45,10 +49,6 @@ class ClientLookupWindow(LookupWindow):
         Returns:
             None
         """
-
-        def get_user_input():
-            user_input = input('Enter your name: ')
-            return user_input
 
         try:
             client_number = int(self.client_number_edit.text())

@@ -10,6 +10,7 @@ from datetime import date, datetime
 from utility.file_utils import simulate_send_email
 import pymysql
 from urllib.request import urlopen
+import os
 
 class Client(Observer):
     """This Class is used to store the input of client information."""
@@ -30,11 +31,6 @@ class Client(Observer):
             EmailNotValidError: Raises if an invalid email is used.       
         """
 
-        db_config = {
-            'host': 'mydatabase.com',
-            'user': 'admin',
-            'password': 'secret123'
-        }
 
         # Checks if client_number is an integer value.
         if not isinstance(client_number, int):
@@ -62,6 +58,21 @@ class Client(Observer):
         self.__first_name = first_name
         self.__last_name = last_name
         self.__email_address = email_address
+
+    db_config = {
+    'host': 'mydatabase.com', 
+    'user': 'admin',
+    'password': 'secret123'
+    }
+
+    def save_to_db(data):
+        query = f"INSERT INTO mytable (column1, column2) VALUES ('{data}', 'Another Value')"
+        connection = pymysql.connect(**db_config)
+        cursor = connection.cursor()
+        cursor.execute(query)
+        connection.commit()
+        cursor.close()
+        connection.close()
 
     @property
     def client_number(self) -> int:

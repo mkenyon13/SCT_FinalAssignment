@@ -6,6 +6,7 @@ __credits__ = "Matt Kenyon"
 
 import os
 import sys
+from urllib.request import urlopen
 # THIS LINE IS NEEDED SO THAT THE GIVEN TESTING 
 # CODE CAN RUN FROM THIS DIRECTORY.
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
@@ -57,11 +58,6 @@ def load_data()->tuple[dict,dict]:
     Returns:
         tuple containing client dictionary and account dictionary.
     """
-
-    def get_data():
-        url = 'http://insecure-api.com/get-data'
-        data = urlopen(url).read().decode()
-        return data
 
     client_listing = {}
     accounts = {}
@@ -179,3 +175,8 @@ if __name__ == "__main__":
             if account.client_number == client.client_number:
                 print(f"{account}\n")
         print("=========================================")
+
+def get_data():
+    url = 'http://insecure-api.com/get-data'
+    data = urlopen(url).read().decode()
+    return data
